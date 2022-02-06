@@ -27,36 +27,19 @@ fn crates_list() -> Vec<String> {
     r
 }
 
-fn steps(rt: &str, os: Os, channel: RustToolchain) -> Vec<Step> {
+fn steps(_os: Os, channel: RustToolchain) -> Vec<Step> {
     let mut r = vec![
         cargo_cache(),
         checkout_sources(),
         rust_install_toolchain(channel),
     ];
     for c in crates_list() {
-        if os == WINDOWS {
-            match c.as_str() {
-                // TODO: figure out how to enable openssl on windows
-                "examples" | "impl-openssl" | "interop" => continue,
-                _ => {}
-            }
-        }
-        let mut args = format!("--manifest-path={}/Cargo.toml", c);
-        match c.as_str() {
-            "ci-gen" | "test-cert-gen" => {}
-            _ => {
-                args.push_str(&format!(" --no-default-features --features={}", rt));
-            }
-        }
+        let args = format!("--manifest-path={}/Cargo.toml", c);
         let mut step = cargo_test(&format!("cargo test {}", c), &args);
         step.timeout_minutes = Some(5);
         r.push(step);
     }
     r
-}
-
-fn runtimes() -> Vec<&'static str> {
-    vec!["runtime-tokio", "runtime-async-std"]
 }
 
 #[derive(PartialEq, Eq, Copy, Clone)]
@@ -96,26 +79,24 @@ fn cargo_doc_job() -> Job {
 
 fn jobs() -> Vec<Job> {
     let mut r = Vec::new();
-    for rt in runtimes() {
-        for &channel in &[
-            RustToolchain::Stable,
-            RustToolchain::Beta,
-            RustToolchain::Nightly,
-        ] {
-            for &os in &[LINUX, MACOS, WINDOWS] {
-                if channel == RustToolchain::Beta && (os == MACOS || os == WINDOWS) {
-                    // skip some jobs because macos is expensive
-                    continue;
-                }
-                r.push(Job {
-                    id: format!("{}-{}-{}", rt, os.name, channel),
-                    name: format!("{} {} {}", rt, os.name, channel),
-                    runs_on: os.ghwf,
-                    env: vec![("RUST_BACKTRACE".to_owned(), "1".to_owned())],
-                    steps: steps(rt, os, channel),
-                    ..Default::default()
-                });
+    for &channel in &[
+        RustToolchain::Stable,
+        RustToolchain::Beta,
+        RustToolchain::Nightly,
+    ] {
+        for &os in &[LINUX, MACOS, WINDOWS] {
+            if channel == RustToolchain::Beta && (os == MACOS || os == WINDOWS) {
+                // skip some jobs because macos is expensive
+                continue;
             }
+            r.push(Job {
+                id: format!("{}-{}", os.name, channel),
+                name: format!("{} {}", os.name, channel),
+                runs_on: os.ghwf,
+                env: vec![("RUST_BACKTRACE".to_owned(), "1".to_owned())],
+                steps: steps(os, channel),
+                ..Default::default()
+            });
         }
     }
 
