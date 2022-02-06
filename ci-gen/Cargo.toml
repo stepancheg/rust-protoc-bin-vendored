@@ -6,5 +6,5 @@ edition = "2018"
 publish = false
 
 [dependencies]
-gh-actions-gen = { git = "https://github.com/stepancheg/gh-actions-gen", rev = "a2e0171d55a29aa0810a4d11a07a43efa3e9db43" }
+gh-actions-gen = { git = "https://github.com/stepancheg/gh-actions-gen", rev = "162ef71bb703b97eca86dc474b3d3d0a972097ad" }
 #gh-actions-gen = { path = "../../gh-actions-gen/gh-actions-gen" }
