@@ -11,7 +11,7 @@ protoc binaries compiled by Google and bundled in this crate.
 """
 
 [lib]
-doctest = false
+doctest = true
 bench = false
 
 [package.metadata.docs.rs]
