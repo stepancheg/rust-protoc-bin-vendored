@@ -1,0 +1,12 @@
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 4
+
+[protoc-bin-vendored/bin/*]
+end_of_line =
+charset =
+indent_style =
+indent_size =
