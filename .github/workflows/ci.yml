@@ -37,6 +37,48 @@ jobs:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
         timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
+        timeout-minutes: 5
   macos-stable:
     name: macos stable
     runs-on: macos-latest
@@ -67,6 +109,48 @@ jobs:
         with:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
         timeout-minutes: 5
   windows-stable:
     name: windows stable
@@ -99,6 +183,48 @@ jobs:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
         timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
+        timeout-minutes: 5
   linux-beta:
     name: linux beta
     runs-on: ubuntu-latest
@@ -129,6 +255,48 @@ jobs:
         with:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
         timeout-minutes: 5
   linux-nightly:
     name: linux nightly
@@ -161,6 +329,48 @@ jobs:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
         timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
+        timeout-minutes: 5
   macos-nightly:
     name: macos nightly
     runs-on: macos-latest
@@ -192,6 +402,48 @@ jobs:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
         timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
+        timeout-minutes: 5
   windows-nightly:
     name: windows nightly
     runs-on: windows-latest
@@ -222,6 +474,48 @@ jobs:
         with:
           command: test
           args: "--manifest-path=protoc-bin-vendored/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-arch-template
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-arch-template/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-aarch_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-aarch_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-ppcle_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-ppcle_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_32/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-linux-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-linux-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-macos-x86_64
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-macos-x86_64/Cargo.toml"
+        timeout-minutes: 5
+      - name: cargo test protoc-bin-vendored-win32
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: "--manifest-path=protoc-bin-vendored-win32/Cargo.toml"
         timeout-minutes: 5
   cargo-doc:
     name: cargo doc

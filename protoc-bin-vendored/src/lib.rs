@@ -17,7 +17,6 @@
 
 use std::env;
 use std::fmt;
-use std::path::Path;
 use std::path::PathBuf;
 
 /// Error returned when a binary is not available.
@@ -44,28 +43,25 @@ impl std::error::Error for Error {}
 /// This function returns an error when binary is not available for
 /// the current operating system and architecture.
 pub fn protoc_bin_path() -> Result<PathBuf, Error> {
-    let protoc_bin_name = match (env::consts::OS, env::consts::ARCH) {
-        ("linux", "x86") => "protoc-linux-x86_32",
-        ("linux", "x86_64") => "protoc-linux-x86_64",
-        ("linux", "aarch64") => "protoc-linux-aarch_64",
-        ("linux", "powerpc64") => "protoc-linux-ppcle_64",
-        ("macos", "x86_64") => "protoc-osx-x86_64",
+    let protoc_bin_path = match (env::consts::OS, env::consts::ARCH) {
+        ("linux", "x86") => protoc_bin_vendored_linux_x86_32::protoc_bin_path(),
+        ("linux", "x86_64") => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
+        ("linux", "aarch64") => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
+        ("linux", "powerpc64") => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
+        ("macos", "x86_64") => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
         // Stopgap support for Apple M1.
         // Since M1 macs can run the x86_64 binary using Rosetta emulation,
         // this updates protoc_bin_path to reuse the protoc-osx-x86_64 binary for macos aarch64.
         // Once Google provides precompiled binaries for Apple ARM,
         // this should be updated to use that instead.
-        ("macos", "aarch64") => "protoc-osx-x86_64",
-        ("windows", _) => "protoc-win32.exe",
+        ("macos", "aarch64") => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
+        ("windows", _) => protoc_bin_vendored_win32::protoc_bin_path(),
         (os, arch) => return Err(Error { os, arch }),
     };
-    let protoc_bin_path = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("bin")
-        .join(protoc_bin_name);
     assert!(
         protoc_bin_path.exists(),
         "internal: protoc not found {}",
-        protoc_bin_name
+        protoc_bin_path.display()
     );
     Ok(protoc_bin_path)
 }
