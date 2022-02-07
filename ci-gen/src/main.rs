@@ -106,7 +106,12 @@ fn jobs() -> Vec<Job> {
 
     r.push(cargo_doc_job());
 
-    r.push(rustfmt_check_job());
+    // TODO: somehow rustfmt doesn't understand `format_generated_files = false` option
+    //   when running on GitHub Actions.
+    if false {
+        r.push(rustfmt_check_job());
+    }
+
     r.push(mega_linter_job());
 
     r
