@@ -34,6 +34,10 @@ fn steps(_os: Os, channel: RustToolchain) -> Vec<Step> {
         rust_install_toolchain(channel),
     ];
     for c in crates_list() {
+        // Not really a crate.
+        if c == "protoc-bin-vendored-arch-template" {
+            continue;
+        }
         let args = format!("--manifest-path={}/Cargo.toml", c);
         let mut step = cargo_test(&format!("cargo test {}", c), &args);
         step.timeout_minutes = Some(5);
