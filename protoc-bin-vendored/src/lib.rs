@@ -101,7 +101,10 @@ mod test {
 
     #[test]
     fn include_path() {
-        assert!(crate::include_path().unwrap().join("google/protobuf/descriptor.proto").exists());
+        assert!(crate::include_path()
+            .unwrap()
+            .join("google/protobuf/descriptor.proto")
+            .exists());
     }
 
     #[test]
