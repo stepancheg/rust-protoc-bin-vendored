@@ -6,8 +6,7 @@ fn cargo_manifest_dir() -> &'static Path {
 }
 
 pub fn include_path() -> PathBuf {
-    let include_path = cargo_manifest_dir()
-        .join("include");
+    let include_path = cargo_manifest_dir().join("include");
     assert!(include_path.is_dir());
     include_path
 }
