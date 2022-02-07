@@ -73,20 +73,25 @@ impl ArchCrate {
 /// This function returns an error when binary is not available for
 /// the current operating system and architecture.
 pub fn protoc_bin_path() -> Result<PathBuf, Error> {
-    let protoc_bin_path = match ArchCrate::detect()? {
+    Ok(match ArchCrate::detect()? {
         ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::protoc_bin_path(),
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
         ArchCrate::Win32 => protoc_bin_vendored_win32::protoc_bin_path(),
-    };
-    assert!(
-        protoc_bin_path.exists(),
-        "internal: protoc not found {}",
-        protoc_bin_path.display()
-    );
-    Ok(protoc_bin_path)
+    })
+}
+
+pub fn include_path() -> Result<PathBuf, Error> {
+    Ok(match ArchCrate::detect()? {
+        ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::include_path(),
+        ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::include_path(),
+        ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::include_path(),
+        ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::include_path(),
+        ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::include_path(),
+        ArchCrate::Win32 => protoc_bin_vendored_win32::include_path(),
+    })
 }
 
 #[cfg(test)]
@@ -95,8 +100,13 @@ mod test {
     use std::process;
 
     #[test]
+    fn include_path() {
+        assert!(crate::include_path().unwrap().join("google/protobuf/descriptor.proto").exists());
+    }
+
+    #[test]
     fn smoke() {
-        let process = process::Command::new(super::protoc_bin_path().unwrap())
+        let process = process::Command::new(crate::protoc_bin_path().unwrap())
             .arg("--version")
             .stdin(process::Stdio::null())
             .stdout(process::Stdio::piped())
