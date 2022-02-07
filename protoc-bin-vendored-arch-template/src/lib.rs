@@ -1,5 +1,7 @@
-use std::path::PathBuf;
+#![rustfmt::skip]
+
 use std::path::Path;
+use std::path::PathBuf;
 
 fn cargo_manifest_dir() -> &'static Path {
     Path::new(env!("CARGO_MANIFEST_DIR"))

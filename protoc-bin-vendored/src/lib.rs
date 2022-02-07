@@ -38,25 +38,48 @@ impl fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
+#[allow(non_camel_case_types)]
+enum ArchCrate {
+    Linux_X86_32,
+    Linux_X86_64,
+    Linux_Aarch_64,
+    Linux_Ppcle_64,
+    Macos_x86_64,
+    Win32,
+}
+
+impl ArchCrate {
+    fn detect() -> Result<ArchCrate, Error> {
+        Ok(match (env::consts::OS, env::consts::ARCH) {
+            ("linux", "x86") => ArchCrate::Linux_X86_32,
+            ("linux", "x86_64") => ArchCrate::Linux_X86_64,
+            ("linux", "aarch64") => ArchCrate::Linux_Aarch_64,
+            ("linux", "powerpc64") => ArchCrate::Linux_Ppcle_64,
+            ("macos", "x86_64") => ArchCrate::Macos_x86_64,
+            // Stopgap support for Apple M1.
+            // Since M1 macs can run the x86_64 binary using Rosetta emulation,
+            // this updates protoc_bin_path to reuse the protoc-osx-x86_64 binary for macos aarch64.
+            // Once Google provides precompiled binaries for Apple ARM,
+            // this should be updated to use that instead.
+            ("macos", "aarch64") => ArchCrate::Macos_x86_64,
+            ("windows", _) => ArchCrate::Win32,
+            (os, arch) => return Err(Error { os, arch }),
+        })
+    }
+}
+
 /// Return a path to `protoc` binary.
 ///
 /// This function returns an error when binary is not available for
 /// the current operating system and architecture.
 pub fn protoc_bin_path() -> Result<PathBuf, Error> {
-    let protoc_bin_path = match (env::consts::OS, env::consts::ARCH) {
-        ("linux", "x86") => protoc_bin_vendored_linux_x86_32::protoc_bin_path(),
-        ("linux", "x86_64") => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
-        ("linux", "aarch64") => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
-        ("linux", "powerpc64") => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
-        ("macos", "x86_64") => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
-        // Stopgap support for Apple M1.
-        // Since M1 macs can run the x86_64 binary using Rosetta emulation,
-        // this updates protoc_bin_path to reuse the protoc-osx-x86_64 binary for macos aarch64.
-        // Once Google provides precompiled binaries for Apple ARM,
-        // this should be updated to use that instead.
-        ("macos", "aarch64") => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
-        ("windows", _) => protoc_bin_vendored_win32::protoc_bin_path(),
-        (os, arch) => return Err(Error { os, arch }),
+    let protoc_bin_path = match ArchCrate::detect()? {
+        ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::protoc_bin_path(),
+        ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
+        ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
+        ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
+        ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
+        ArchCrate::Win32 => protoc_bin_vendored_win32::protoc_bin_path(),
     };
     assert!(
         protoc_bin_path.exists(),
