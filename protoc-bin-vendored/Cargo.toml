@@ -1,6 +1,6 @@
 [package]
 name = "protoc-bin-vendored"
-version = "3.0.0-pre"
+version = "3.0.0"
 edition = "2018"
 authors = ["Stepan Koltsov <stepan.koltsov@gmail.com>"]
 license = "MIT"
@@ -15,12 +15,12 @@ doctest = true
 bench = false
 
 [dependencies]
-protoc-bin-vendored-linux-x86_64 = { path = "../protoc-bin-vendored-linux-x86_64", version = "=3.0.0-pre" }
-protoc-bin-vendored-linux-x86_32 = { path = "../protoc-bin-vendored-linux-x86_32", version = "=3.0.0-pre" }
-protoc-bin-vendored-linux-aarch_64 = { path = "../protoc-bin-vendored-linux-aarch_64", version = "=3.0.0-pre" }
-protoc-bin-vendored-linux-ppcle_64 = { path = "../protoc-bin-vendored-linux-ppcle_64", version = "=3.0.0-pre" }
-protoc-bin-vendored-macos-x86_64 = { path = "../protoc-bin-vendored-macos-x86_64", version = "=3.0.0-pre" }
-protoc-bin-vendored-win32 = { path = "../protoc-bin-vendored-win32", version = "=3.0.0-pre" }
+protoc-bin-vendored-linux-x86_64 = { path = "../protoc-bin-vendored-linux-x86_64", version = "=3.0.0" }
+protoc-bin-vendored-linux-x86_32 = { path = "../protoc-bin-vendored-linux-x86_32", version = "=3.0.0" }
+protoc-bin-vendored-linux-aarch_64 = { path = "../protoc-bin-vendored-linux-aarch_64", version = "=3.0.0" }
+protoc-bin-vendored-linux-ppcle_64 = { path = "../protoc-bin-vendored-linux-ppcle_64", version = "=3.0.0" }
+protoc-bin-vendored-macos-x86_64 = { path = "../protoc-bin-vendored-macos-x86_64", version = "=3.0.0" }
+protoc-bin-vendored-win32 = { path = "../protoc-bin-vendored-win32", version = "=3.0.0" }
 
 [package.metadata.docs.rs]
 all-features = true
