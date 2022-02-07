@@ -10,7 +10,8 @@ tag_name=$(curl -s https://api.github.com/repos/protocolbuffers/protobuf/release
 echo "$tag_name" >protoc-bin-vendored/version.txt
 echo "updating protoc binaries to version $tag_name" >&2
 
-for arch in linux-aarch_64 linux-ppcle_64 linux-x86_32 linux-x86_64 osx-x86_64 win32; do
+update_arch() {
+    arch="$1"
     TMPFILE=$(mktemp)
     url="https://github.com/protocolbuffers/protobuf/releases/download/${tag_name}/protoc-${tag_name#v}-${arch}.zip"
     echo "downloading $url..." >&2
@@ -30,4 +31,11 @@ for arch in linux-aarch_64 linux-ppcle_64 linux-x86_32 linux-x86_64 osx-x86_64 w
         )
     fi
     rm "${TMPFILE}.zip"
-done
+}
+
+update_arch "linux-aarch_64"
+update_arch "linux-ppcle_64"
+update_arch "linux-x86_32"
+update_arch "linux-x86_64"
+update_arch "osx-x86_64"
+update_arch "win32"
