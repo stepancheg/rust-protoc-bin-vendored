@@ -12,7 +12,7 @@ fn main() {
         }
     };
     let mut command = match process::Command::new(protoc_bin_path)
-        .args(env::args())
+        .args(env::args_os().skip(1))
         .spawn()
     {
         Ok(command) => command,
