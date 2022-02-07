@@ -25,7 +25,6 @@ for arch in linux-aarch_64 linux-ppcle_64 linux-x86_32 linux-x86_64 osx-x86_64 w
         unzip "${TMPFILE}.zip" "include/*" -d .
         # Check we are in correct directory
         test -e ../protoc-bin-vendored/README.md
-        cp -r include/google ../protoc-bin-vendored/src/proto/
     fi
     rm "${TMPFILE}.zip"
 done
