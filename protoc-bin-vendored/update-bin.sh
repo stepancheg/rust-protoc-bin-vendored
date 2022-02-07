@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-set -e
+# Update bundled `protoc` binary to the latest version.
+
+set -ex
 
 cd "$(dirname "$0")"
 
@@ -22,8 +24,8 @@ for arch in linux-aarch_64 linux-ppcle_64 linux-x86_32 linux-x86_64 osx-x86_64 w
         rm -rf include
         unzip "${TMPFILE}.zip" "include/*" -d .
         # Check we are in correct directory
-        test -e ../protobuf-codegen-pure/src/proto/README.md
-        cp -r include/google ../protobuf-codegen-pure/src/proto/
+        test -e ../protoc-bin-vendored/README.md
+        cp -r include/google ../protoc-bin-vendored/src/proto/
     fi
     rm "${TMPFILE}.zip"
 done
