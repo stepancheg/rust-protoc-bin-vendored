@@ -50,6 +50,7 @@ impl std::error::Error for Error {}
 enum ArchCrate {
     Linux_X86_32,
     Linux_X86_64,
+    Linux_riscv64,
     Linux_Aarch_64,
     Linux_Ppcle_64,
     Macos_x86_64,
@@ -61,6 +62,7 @@ impl ArchCrate {
         Ok(match (env::consts::OS, env::consts::ARCH) {
             ("linux", "x86") => ArchCrate::Linux_X86_32,
             ("linux", "x86_64") => ArchCrate::Linux_X86_64,
+            ("linux", "riscv64") => ArchCrate::Linux_riscv64,
             ("linux", "aarch64") => ArchCrate::Linux_Aarch_64,
             ("linux", "powerpc64") => ArchCrate::Linux_Ppcle_64,
             ("macos", "x86_64") => ArchCrate::Macos_x86_64,
@@ -84,6 +86,7 @@ pub fn protoc_bin_path() -> Result<PathBuf, Error> {
     Ok(match ArchCrate::detect()? {
         ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::protoc_bin_path(),
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
+        ArchCrate::Linux_riscv64 => protoc_bin_vendored_linux_riscv64::protoc_bin_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
@@ -95,6 +98,7 @@ pub(crate) fn include_path_for_arch(arch_crate: &ArchCrate) -> PathBuf {
     match arch_crate {
         ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::include_path(),
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::include_path(),
+        ArchCrate::Linux_riscv64 => protoc_bin_vendored_linux_riscv64::include_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::include_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::include_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::include_path(),

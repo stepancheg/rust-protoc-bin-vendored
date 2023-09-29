@@ -4,6 +4,7 @@ members = [
     "protoc-bin-vendored",
     "protoc-bin-vendored-linux-x86_32",
     "protoc-bin-vendored-linux-x86_64",
+    "protoc-bin-vendored-linux-riscv64",
     "protoc-bin-vendored-linux-aarch_64",
     "protoc-bin-vendored-linux-ppcle_64",
     "protoc-bin-vendored-macos-x86_64",

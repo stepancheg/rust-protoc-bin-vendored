@@ -15,6 +15,7 @@ doctest = true
 bench = false
 
 [dependencies]
+protoc-bin-vendored-linux-riscv64 = { path = "../protoc-bin-vendored-linux-riscv64", version = "=3.0.0" }
 protoc-bin-vendored-linux-x86_64 = { path = "../protoc-bin-vendored-linux-x86_64", version = "=3.0.0" }
 protoc-bin-vendored-linux-x86_32 = { path = "../protoc-bin-vendored-linux-x86_32", version = "=3.0.0" }
 protoc-bin-vendored-linux-aarch_64 = { path = "../protoc-bin-vendored-linux-aarch_64", version = "=3.0.0" }
