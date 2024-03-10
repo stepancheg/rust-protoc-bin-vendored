@@ -6,6 +6,7 @@ members = [
     "protoc-bin-vendored-linux-x86_64",
     "protoc-bin-vendored-linux-aarch_64",
     "protoc-bin-vendored-linux-ppcle_64",
+    "protoc-bin-vendored-macos-aarch_64",
     "protoc-bin-vendored-macos-x86_64",
     "protoc-bin-vendored-win32",
 ]

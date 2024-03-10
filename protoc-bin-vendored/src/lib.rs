@@ -52,6 +52,7 @@ enum ArchCrate {
     Linux_X86_64,
     Linux_Aarch_64,
     Linux_Ppcle_64,
+    Macos_Aarch_64,
     Macos_x86_64,
     Win32,
 }
@@ -64,12 +65,7 @@ impl ArchCrate {
             ("linux", "aarch64") => ArchCrate::Linux_Aarch_64,
             ("linux", "powerpc64") => ArchCrate::Linux_Ppcle_64,
             ("macos", "x86_64") => ArchCrate::Macos_x86_64,
-            // Stopgap support for Apple M1.
-            // Since M1 macs can run the x86_64 binary using Rosetta emulation,
-            // this updates protoc_bin_path to reuse the protoc-osx-x86_64 binary for macos aarch64.
-            // Once Google provides precompiled binaries for Apple ARM,
-            // this should be updated to use that instead.
-            ("macos", "aarch64") => ArchCrate::Macos_x86_64,
+            ("macos", "aarch64") => ArchCrate::Macos_Aarch_64,
             ("windows", _) => ArchCrate::Win32,
             (os, arch) => return Err(Error { os, arch }),
         })
@@ -86,6 +82,7 @@ pub fn protoc_bin_path() -> Result<PathBuf, Error> {
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
+        ArchCrate::Macos_Aarch_64 => protoc_bin_vendored_macos_aarch_64::protoc_bin_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
         ArchCrate::Win32 => protoc_bin_vendored_win32::protoc_bin_path(),
     })
@@ -97,6 +94,7 @@ pub(crate) fn include_path_for_arch(arch_crate: &ArchCrate) -> PathBuf {
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::include_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::include_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::include_path(),
+        ArchCrate::Macos_Aarch_64 => protoc_bin_vendored_macos_aarch_64::include_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::include_path(),
         ArchCrate::Win32 => protoc_bin_vendored_win32::include_path(),
     }
@@ -178,6 +176,10 @@ mod test {
         compare_recursively(
             &include_path_for_arch(&ArchCrate::Linux_X86_64),
             &include_path_for_arch(&ArchCrate::Linux_Ppcle_64),
+        );
+        compare_recursively(
+            &include_path_for_arch(&ArchCrate::Linux_X86_64),
+            &include_path_for_arch(&ArchCrate::Macos_Aarch_64),
         );
         compare_recursively(
             &include_path_for_arch(&ArchCrate::Linux_X86_64),
