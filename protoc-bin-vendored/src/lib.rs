@@ -52,6 +52,7 @@ enum ArchCrate {
     Linux_X86_64,
     Linux_Aarch_64,
     Linux_Ppcle_64,
+    Linux_S390_64,
     Macos_Aarch_64,
     Macos_x86_64,
     Win32,
@@ -64,6 +65,7 @@ impl ArchCrate {
             ("linux", "x86_64") => ArchCrate::Linux_X86_64,
             ("linux", "aarch64") => ArchCrate::Linux_Aarch_64,
             ("linux", "powerpc64") => ArchCrate::Linux_Ppcle_64,
+            ("linux", "s390x") => ArchCrate::Linux_S390_64,
             ("macos", "x86_64") => ArchCrate::Macos_x86_64,
             ("macos", "aarch64") => ArchCrate::Macos_Aarch_64,
             ("windows", _) => ArchCrate::Win32,
@@ -82,6 +84,7 @@ pub fn protoc_bin_path() -> Result<PathBuf, Error> {
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
+        ArchCrate::Linux_S390_64 => protoc_bin_vendored_linux_s390_64::protoc_bin_path(),
         ArchCrate::Macos_Aarch_64 => protoc_bin_vendored_macos_aarch_64::protoc_bin_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
         ArchCrate::Win32 => protoc_bin_vendored_win32::protoc_bin_path(),
@@ -94,6 +97,7 @@ pub(crate) fn include_path_for_arch(arch_crate: &ArchCrate) -> PathBuf {
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::include_path(),
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::include_path(),
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::include_path(),
+        ArchCrate::Linux_S390_64 => protoc_bin_vendored_linux_s390_64::include_path(),
         ArchCrate::Macos_Aarch_64 => protoc_bin_vendored_macos_aarch_64::include_path(),
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::include_path(),
         ArchCrate::Win32 => protoc_bin_vendored_win32::include_path(),
@@ -176,6 +180,10 @@ mod test {
         compare_recursively(
             &include_path_for_arch(&ArchCrate::Linux_X86_64),
             &include_path_for_arch(&ArchCrate::Linux_Ppcle_64),
+        );
+        compare_recursively(
+            &include_path_for_arch(&ArchCrate::Linux_X86_64),
+            &include_path_for_arch(&ArchCrate::Linux_S390_64),
         );
         compare_recursively(
             &include_path_for_arch(&ArchCrate::Linux_X86_64),
