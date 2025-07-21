@@ -57,6 +57,7 @@ update_arch() {
 
 update_arch "linux-aarch_64" "protoc-bin-vendored-linux-aarch_64"
 update_arch "linux-ppcle_64" "protoc-bin-vendored-linux-ppcle_64"
+update_arch "linux-s390_64" "protoc-bin-vendored-linux-s390_64"
 update_arch "linux-x86_32" "protoc-bin-vendored-linux-x86_32"
 update_arch "linux-x86_64" "protoc-bin-vendored-linux-x86_64"
 update_arch "osx-aarch_64" "protoc-bin-vendored-macos-aarch_64"
