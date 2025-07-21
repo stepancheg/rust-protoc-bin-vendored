@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.2.0] - 2025-07-21
+
+- Bump `protoc` to 31.1
+- Add s390x
+
 ## [3.1.0] - 2024-09-30
 
 - Bump `protoc` to 28.2
