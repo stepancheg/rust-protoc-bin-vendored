@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add linux-riscv64 (protoc 31.1, cross-compiled; Google does not publish this arch)
+
 ## [3.2.0] - 2025-07-21
 
 - Bump `protoc` to 31.1
