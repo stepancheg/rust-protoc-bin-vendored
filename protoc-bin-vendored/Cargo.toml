@@ -20,6 +20,7 @@ protoc-bin-vendored-linux-x86_32 =   { workspace = true }
 protoc-bin-vendored-linux-aarch_64 = { workspace = true }
 protoc-bin-vendored-linux-ppcle_64 = { workspace = true }
 protoc-bin-vendored-linux-s390_64 =  { workspace = true }
+protoc-bin-vendored-linux-riscv64 =  { workspace = true }
 protoc-bin-vendored-macos-aarch_64 = { workspace = true }
 protoc-bin-vendored-macos-x86_64 =   { workspace = true }
 protoc-bin-vendored-win32 =          { workspace = true }
