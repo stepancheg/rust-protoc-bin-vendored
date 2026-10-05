@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.3.0] - 2026-10-05
+
+- Bump `protoc` to 36.2
+
 ## [3.2.0] - 2025-07-21
 
 - Bump `protoc` to 31.1
