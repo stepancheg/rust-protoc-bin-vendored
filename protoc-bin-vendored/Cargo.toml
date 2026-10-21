@@ -15,6 +15,16 @@ doctest = true
 bench = false
 
 [dependencies]
+protoc-bin-vendored-linux-x86_64 =   { workspace = true, optional = true }
+protoc-bin-vendored-linux-x86_32 =   { workspace = true, optional = true }
+protoc-bin-vendored-linux-aarch_64 = { workspace = true, optional = true }
+protoc-bin-vendored-linux-ppcle_64 = { workspace = true, optional = true }
+protoc-bin-vendored-linux-s390_64 =  { workspace = true, optional = true }
+protoc-bin-vendored-macos-aarch_64 = { workspace = true, optional = true }
+protoc-bin-vendored-macos-x86_64 =   { workspace = true, optional = true }
+protoc-bin-vendored-win32 =          { workspace = true, optional = true }
+
+[dev-dependencies]
 protoc-bin-vendored-linux-x86_64 =   { workspace = true }
 protoc-bin-vendored-linux-x86_32 =   { workspace = true }
 protoc-bin-vendored-linux-aarch_64 = { workspace = true }
@@ -23,6 +33,30 @@ protoc-bin-vendored-linux-s390_64 =  { workspace = true }
 protoc-bin-vendored-macos-aarch_64 = { workspace = true }
 protoc-bin-vendored-macos-x86_64 =   { workspace = true }
 protoc-bin-vendored-win32 =          { workspace = true }
+
+[target.'cfg(all(target_os = "linux", target_arch = "x86_64"))'.dependencies]
+protoc-bin-vendored-linux-x86_64 = { workspace = true, optional = false }
+
+[target.'cfg(all(target_os = "linux", target_arch = "x86"))'.dependencies]
+protoc-bin-vendored-linux-x86_32 = { workspace = true, optional = false }
+
+[target.'cfg(all(target_os = "linux", target_arch = "aarch64"))'.dependencies]
+protoc-bin-vendored-linux-aarch_64 = { workspace = true, optional = false }
+
+[target.'cfg(all(target_os = "linux", target_arch = "powerpc64"))'.dependencies]
+protoc-bin-vendored-linux-ppcle_64 = { workspace = true, optional = false }
+
+[target.'cfg(all(target_os = "linux", target_arch = "s390x"))'.dependencies]
+protoc-bin-vendored-linux-s390_64 = { workspace = true, optional = false }
+
+[target.'cfg(all(target_os = "macos", target_arch = "aarch64"))'.dependencies]
+protoc-bin-vendored-macos-aarch_64 = { workspace = true, optional = false }
+
+[target.'cfg(all(target_os = "macos", target_arch = "x86_64"))'.dependencies]
+protoc-bin-vendored-macos-x86_64 = { workspace = true, optional = false }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+protoc-bin-vendored-win32 = { workspace = true, optional = false }
 
 [package.metadata.docs.rs]
 all-features = true

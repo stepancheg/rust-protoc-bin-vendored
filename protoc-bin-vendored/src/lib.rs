@@ -48,26 +48,42 @@ impl std::error::Error for Error {}
 
 #[allow(non_camel_case_types)]
 enum ArchCrate {
+    #[cfg(any(all(target_os = "linux", target_arch = "x86"), test))]
     Linux_X86_32,
+    #[cfg(any(all(target_os = "linux", target_arch = "x86_64"), test))]
     Linux_X86_64,
+    #[cfg(any(all(target_os = "linux", target_arch = "aarch64"), test))]
     Linux_Aarch_64,
+    #[cfg(any(all(target_os = "linux", target_arch = "powerpc64"), test))]
     Linux_Ppcle_64,
+    #[cfg(any(all(target_os = "linux", target_arch = "s390x"), test))]
     Linux_S390_64,
+    #[cfg(any(all(target_os = "macos", target_arch = "aarch64"), test))]
     Macos_Aarch_64,
+    #[cfg(any(all(target_os = "macos", target_arch = "x86_64"), test))]
     Macos_x86_64,
+    #[cfg(any(target_os = "windows", test))]
     Win32,
 }
 
 impl ArchCrate {
     fn detect() -> Result<ArchCrate, Error> {
         Ok(match (env::consts::OS, env::consts::ARCH) {
+            #[cfg(any(all(target_os = "linux", target_arch = "x86"), test))]
             ("linux", "x86") => ArchCrate::Linux_X86_32,
+            #[cfg(any(all(target_os = "linux", target_arch = "x86_64"), test))]
             ("linux", "x86_64") => ArchCrate::Linux_X86_64,
+            #[cfg(any(all(target_os = "linux", target_arch = "aarch64"), test))]
             ("linux", "aarch64") => ArchCrate::Linux_Aarch_64,
+            #[cfg(any(all(target_os = "linux", target_arch = "powerpc64"), test))]
             ("linux", "powerpc64") => ArchCrate::Linux_Ppcle_64,
+            #[cfg(any(all(target_os = "linux", target_arch = "s390x"), test))]
             ("linux", "s390x") => ArchCrate::Linux_S390_64,
-            ("macos", "x86_64") => ArchCrate::Macos_x86_64,
+            #[cfg(any(all(target_os = "macos", target_arch = "aarch64"), test))]
             ("macos", "aarch64") => ArchCrate::Macos_Aarch_64,
+            #[cfg(any(all(target_os = "macos", target_arch = "x86_64"), test))]
+            ("macos", "x86_64") => ArchCrate::Macos_x86_64,
+            #[cfg(any(target_os = "windows", test))]
             ("windows", _) => ArchCrate::Win32,
             (os, arch) => return Err(Error { os, arch }),
         })
@@ -80,26 +96,42 @@ impl ArchCrate {
 /// the current operating system and architecture.
 pub fn protoc_bin_path() -> Result<PathBuf, Error> {
     Ok(match ArchCrate::detect()? {
+        #[cfg(any(all(target_os = "linux", target_arch = "x86"), test))]
         ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::protoc_bin_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "x86_64"), test))]
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::protoc_bin_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "aarch64"), test))]
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::protoc_bin_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "powerpc64"), test))]
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::protoc_bin_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "s390x"), test))]
         ArchCrate::Linux_S390_64 => protoc_bin_vendored_linux_s390_64::protoc_bin_path(),
+        #[cfg(any(all(target_os = "macos", target_arch = "aarch64"), test))]
         ArchCrate::Macos_Aarch_64 => protoc_bin_vendored_macos_aarch_64::protoc_bin_path(),
+        #[cfg(any(all(target_os = "macos", target_arch = "x86_64"), test))]
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::protoc_bin_path(),
+        #[cfg(any(target_os = "windows", test))]
         ArchCrate::Win32 => protoc_bin_vendored_win32::protoc_bin_path(),
     })
 }
 
 pub(crate) fn include_path_for_arch(arch_crate: &ArchCrate) -> PathBuf {
     match arch_crate {
+        #[cfg(any(all(target_os = "linux", target_arch = "x86"), test))]
         ArchCrate::Linux_X86_32 => protoc_bin_vendored_linux_x86_32::include_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "x86_64"), test))]
         ArchCrate::Linux_X86_64 => protoc_bin_vendored_linux_x86_64::include_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "aarch64"), test))]
         ArchCrate::Linux_Aarch_64 => protoc_bin_vendored_linux_aarch_64::include_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "powerpc64"), test))]
         ArchCrate::Linux_Ppcle_64 => protoc_bin_vendored_linux_ppcle_64::include_path(),
+        #[cfg(any(all(target_os = "linux", target_arch = "s390x"), test))]
         ArchCrate::Linux_S390_64 => protoc_bin_vendored_linux_s390_64::include_path(),
+        #[cfg(any(all(target_os = "macos", target_arch = "aarch64"), test))]
         ArchCrate::Macos_Aarch_64 => protoc_bin_vendored_macos_aarch_64::include_path(),
+        #[cfg(any(all(target_os = "macos", target_arch = "x86_64"), test))]
         ArchCrate::Macos_x86_64 => protoc_bin_vendored_macos_x86_64::include_path(),
+        #[cfg(any(target_os = "windows", test))]
         ArchCrate::Win32 => protoc_bin_vendored_win32::include_path(),
     }
 }
